@@ -1,0 +1,4 @@
+.vscode/*
+__pycache__/*
+keycloak.json
+.git.backup/*

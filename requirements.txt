@@ -1,0 +1,3 @@
+dash==2.11.1
+dash-extensions==1.0.1
+dash-keycloak==0.0.25
