@@ -1,15 +1,18 @@
 from dash_extensions.enrich import DashBlueprint, DashProxy, html, Output, Input
+from flask import session
 
 # Define a small example app.
 app = DashBlueprint()
-app.layout = html.Div([html.Div("Keycloak auth"), html.Button("Click me", id="btn"), html.Div(id="log")])
+app.layout = html.Div([html.Div("Keycloak auth", id="main"), html.Div(id="greeting")])
 
-@app.callback(Output("log", "children"), Input("btn", "n_clicks"))
-def update(n_clicks: int):
-    """
-    Simple callback function.
-    """
-    return str(n_clicks)
+
+@app.callback(
+    Output('greeting', 'children'),
+    [Input('main', 'children')])
+def update_greeting(input_value):
+    user = session["userinfo"]
+    return "Hello {}!".format(user['preferred_username'])
+
 
 # Run the app in "standalone" mode for debugging.
 if __name__ == '__main__':
